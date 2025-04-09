@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: yourls-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: yourls
+      MYSQL_USER: yourls
+      MYSQL_PASSWORD: yourlspass
+    ports:
+      - "3306:3306"
+    volumes:
+      - yourls_db_data:/var/lib/mysql
+
+  yourls:
+    image: yourls
+    container_name: yourls
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    environment:
+      YOURLS_SITE: "http://localhost:8080"
+      YOURLS_USER: "admin"
+      YOURLS_PASS: "admin123"
+      YOURLS_DB_USER: "yourls"
+      YOURLS_DB_PASS: "yourlspass"
+      YOURLS_DB_NAME: "yourls"
+      YOURLS_DB_HOST: "mysql"
+
+volumes:
+  yourls_db_data:
