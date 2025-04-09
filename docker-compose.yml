@@ -24,7 +24,7 @@ services:
     depends_on:
       - mysql
     environment:
-      YOURLS_SITE: "http://localhost:8080"
+      YOURLS_SITE: "https://enlacito.onrender.com"
       YOURLS_USER: "admin"
       YOURLS_PASS: "admin123"
       YOURLS_DB_USER: "yourls"
